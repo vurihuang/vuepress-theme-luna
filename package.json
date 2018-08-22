@@ -1,0 +1,22 @@
+{
+  "name": "vuepress-theme-luna",
+  "version": "0.1.0",
+  "description": "A simple blog theme for VuePress.",
+  "main": "Layout.vue",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upeoe/vuepress-theme-luna.git"
+  },
+  "keywords": ["vuepress", "theme"],
+  "author": "upeoe <vengeancehuang@gmail.com>",
+  "devDependencies": {
+    "vuepress": "^0.8.4"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "dayjs": "^1.6.3"
+  }
+}
