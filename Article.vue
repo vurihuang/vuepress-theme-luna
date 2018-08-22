@@ -6,11 +6,11 @@
 			</router-link>
 		</h2>
 		<div class="article-date" v-if="page.date">
-		 	{{ page.date }}
+			{{ page.date | date }}
 		</div>
 		<div class="article-desc"
-			v-if="page.excerpt || page.description">
-			{{ page.excerpt || page.description }}
+			v-if="article.excerpt || page.description">
+			{{ article.excerpt || page.description }}
 		</div>
 	</div>
 </template>

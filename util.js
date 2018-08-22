@@ -107,7 +107,7 @@ function resolvePath (relative, base, append) {
 
 export function resolveSidebarItems (page, route, site, localePath) {
   const pageSidebarConfig = page.frontmatter.sidebar
-  if (pageSidebarConfig === 'auto') {
+  if (pageSidebarConfig != false) {
     return resolveHeaders(page)
   }
   const { pages, themeConfig } = site
@@ -211,16 +211,34 @@ function resolveItem (item, pages, base, isNested) {
   }
 }
 
+function sortedPages (pages) {
+	const pageHasDate = pages.filter(p => p.frontmatter.date)
+	const pageHasntDate = pages.filter(p => !p.frontmatter.date)
+
+	let _pages = pageHasDate.map((p, i) => ({
+		index: i,
+		date: +new Date(p.frontmatter.date)
+	}))
+
+	_pages.sort((p, n) => {
+		if (p.date > n.date) return -1
+		if (p.date < n.date) return 1
+		return 0
+	})
+
+	return _pages.map(p => pageHasDate[p.index]).concat(pageHasntDate)
+}
+
 export function normalizedPages (pages, navs) {
 	const navLinks = (navs || []).map(n => navsLinksNormalized(n.link))
 	const _pages = pages.filter(page => page.path !== '/' &&
 															!~navLinks.indexOf(page.path) &&
 															!isHidden(page))
-	return _pages
+	return sortedPages(_pages)
 }
 
 export function navsLinksNormalized (link) {
-	const match = link.match(indexRE)
+	const match = indexRE.test(link)
 	return match ? match[1] : link
 }
 

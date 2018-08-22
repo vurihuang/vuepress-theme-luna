@@ -23,4 +23,9 @@ export default {
 	padding-top $navbarHeight
 	width 60%
 	margin 0 auto
+
+@media ( max-width: ($MQMobile) )
+	.articles-wrapper
+		width 100%
+		text-align center
 </style>

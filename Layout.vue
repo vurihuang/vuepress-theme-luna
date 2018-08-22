@@ -12,8 +12,8 @@
     <div class="custom-layout" v-if="$page.frontmatter.layout">
       <component :is="$page.frontmatter.layout"/>
     </div>
-	  <Home v-else-if="$page.frontmatter.home"/>
-		<ArticlesGroup v-else-if="isArticles" :articles="pages" />
+      <Home v-else-if="$page.frontmatter.home"/>
+      <ArticlesGroup v-else-if="isArticles" :articles="pages" />
     <Page v-else :sidebar-items="sidebarItems">
       <slot name="page-top" slot="top"/>
       <slot name="page-bottom" slot="bottom"/>
@@ -82,12 +82,12 @@ export default {
         userPageClass
       ]
     },
-		isArticles() {
-			return this.$route.path === '/' || this.$page.frontmatter.articles
-		},
-		pages() {
-			return normalizedPages(this.$site.pages, this.$site.themeConfig.nav)
-		}
+    isArticles() {
+      return this.$route.path === '/'
+    },
+    pages() {
+        return normalizedPages(this.$site.pages, this.$site.themeConfig.nav)
+    }
   },
 
   created () {
@@ -131,8 +131,6 @@ export default {
       nprogress.done()
       this.isSidebarOpen = false
     })
-		console.log('sidebarItems', this.sidebarItems)
-		console.log('articles', this.pages)
   },
 
   beforeDestroy () {
